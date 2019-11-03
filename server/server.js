@@ -1,6 +1,7 @@
-// const loader = require('@grpc/proto-loader')
+const loader = require('@grpc/proto-loader')
 const grpc = require('grpc')
-const pingPongProto = grpc.load('ping_pong.proto')
+const proto = loader.loadSync('ping_pong.proto')
+const pingPongProto = grpc.loadPackageDefinition(proto)
 const server = new grpc.Server()
 
 server.addService(pingPongProto.pingpong.PingPongService.service, {
